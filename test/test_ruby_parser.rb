@@ -486,32 +486,4 @@ class TestRubyParser < RubyParserTestCase
     assert_equal 3, body.lasgn.line,  "lasgn should have line number"
     assert_equal 4, body.return.line, "return should have line number"
   end
-
-  def test_1_9_block_args_splat
-    rb = "lambda{|a, *b|}"
-
-    pt = s(:iter,
-          s(:call, nil, :lambda, s(:arglist)),
-            s(:masgn,
-              s(:array,
-                s(:lasgn, :a),
-                s(:splat, s(:lasgn, :b)))))
-
-    result = @processor.parse(rb)
-    assert_equal pt, result
-  end
-
-  # def test_1_9_bock_defaults
-  #   rb = "lambda{|a, b = 42|}"
-  #
-  #   pt = s(:iter,
-  #          s(:call, nil, :lambda, s(:arglist)),
-  #            s(:masgn,
-  #             s(:array,
-  #               s(:lasgn, :a),
-  #               s(:lasgn, :b, s(:lit, 42)))))
-  #
-  #   result = @processor.parse(rb)
-  #   assert_equal pt, result
-  # end
 end
