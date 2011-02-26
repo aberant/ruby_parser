@@ -1558,6 +1558,17 @@ class ParseTreeTestCase < MiniTest::Unit::TestCase
                                     s(:lasgn, :opt, s(:lit, 42)))),
                                 s(:scope, s(:block, s(:nil)))))
 
+  # add_tests("defn_args_mand_splat_mand",
+  #           "Ruby"         => "def f(mand, *penultimate_rest, mand2)\n  # do nothing\nend",
+  #           "RawParseTree" => [:defn, :f,
+  #                              [:scope,
+  #                               [:block,
+  #                                [:args, :mand, :"*penultimate_rest", :mand2],
+  #                                [:nil]]]],
+  #           "ParseTree"    => s(:defn, :f,
+  #                               s(:args, :mand, :"*penultimate_rest", :mand2),
+  #                               s(:scope, s(:block, s(:nil)))))
+
   add_tests("defn_args_mand_opt_splat_no_name",
             "Ruby"         => "def x(a, b = 42, *)\n  # do nothing\nend",
             "RawParseTree" => [:defn, :x,
