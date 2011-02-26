@@ -488,28 +488,30 @@ class TestRubyParser < RubyParserTestCase
   end
 
   def test_1_9_block_args_splat
-    rb = "blah do |a, *b|\n  end"
+    rb = "lambda{|a, *b|}"
+
     pt = s(:iter,
-           s(:call, nil, :blah, s(:arglist)),
-             s(:masgn,
-               s(:array,
-                 s(:lasgn, :a),
-                 s(:splat, s(:lasgn, :b)))))
-
-
-
-    result = @processor.parse(rb)
-  end
-
-  def test_1_9_bock_defaults
-    rb = "blah do |a, b = 42|\n  end"
-    pt = s(:iter,
-           s(:call, nil, :blah, s(:arglist)),
-             s(:masgn,
+          s(:call, nil, :lambda, s(:arglist)),
+            s(:masgn,
               s(:array,
                 s(:lasgn, :a),
-                s(:lasgn, :b, s(:lit, 42)))))
+                s(:splat, s(:lasgn, :b)))))
 
     result = @processor.parse(rb)
+    assert_equal pt, result
   end
+
+  # def test_1_9_bock_defaults
+  #   rb = "lambda{|a, b = 42|}"
+  #
+  #   pt = s(:iter,
+  #          s(:call, nil, :lambda, s(:arglist)),
+  #            s(:masgn,
+  #             s(:array,
+  #               s(:lasgn, :a),
+  #               s(:lasgn, :b, s(:lit, 42)))))
+  #
+  #   result = @processor.parse(rb)
+  #   assert_equal pt, result
+  # end
 end
