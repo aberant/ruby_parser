@@ -1780,6 +1780,16 @@ class TestRubyLexer < MiniTest::Unit::TestCase
                    :tFLOAT, 0.0)
   end
 
+  # def test_1_9_stabby_proc_definition
+  #   util_lex_token("->(x){}",
+  #                   :tSTABBY, "->",
+  #                   :tLPAREN2, "(",
+  #                   :tIDENTIFIER, "x",
+  #                   :tRPAREN, ")",
+  #                   :tLCURLY, "{"
+  #                   :tRCURLY, "}")
+  # end
+
   ############################################################
 
   def util_bad_token s, *args
