@@ -2251,6 +2251,19 @@ class ParseTreeTestCase < MiniTest::Unit::TestCase
                                     s(:lit, :a), s(:lit, 1),
                                     s(:lit, :b), s(:lit, 2)))))
 
+  # add_tests("fcall_arglist_alternate_hash",
+  #           "Ruby"         => "m(a:1, b:2)",
+  #           "RawParseTree" => [:fcall, :m,
+  #                              [:array,
+  #                               [:hash,
+  #                                [:lit, :a], [:lit, 1],
+  #                                [:lit, :b], [:lit, 2]]]],
+  #           "ParseTree"    => s(:call, nil, :m,
+  #                               s(:arglist,
+  #                                 s(:hash,
+  #                                   s(:lit, :a), s(:lit, 1),
+  #                                   s(:lit, :b), s(:lit, 2)))))
+
   add_tests("fcall_arglist_norm_hash",
             "Ruby"         => "m(42, :a => 1, :b => 2)",
             "RawParseTree" => [:fcall, :m,
